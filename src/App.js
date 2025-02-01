@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Clock from "./components/Clock";
 
 function App() {
+
+  const [time, setTime] = useState(new Date());
+  const [labs, setLabs] = useState([]);
+
+  function handleLabs() {
+    setLabs([...labs, time.toLocaleTimeString()]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Clock time={time} setTime={setTime} />
+      <button className="btn" onClick={handleLabs}>Click</button>
+      {labs.map((lab) => (
+        <p key={lab}>{lab}</p>
+      ))}
     </div>
   );
 }
